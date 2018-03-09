@@ -1,0 +1,32 @@
+image: node:8.9.4
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  before_script:
+    - npm config set registry http://r.cnpmjs.org/
+  script:
+    - yarn
+    - yarn lint
+    - yarn build
+
+deploy-on-master:
+  stage: deploy
+  when: manual
+  script:
+    - docker build . -t ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}
+    - docker push ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}
+  only:
+    - master
+
+deploy-on-tags:
+  stage: deploy
+  when: manual
+  script:
+    - docker build . -t ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}
+    - docker push ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}
+  only:
+    - tags

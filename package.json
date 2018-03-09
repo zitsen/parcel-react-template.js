@@ -1,0 +1,32 @@
+{
+  "name": "parcel-react-template",
+  "version": "1.0.0",
+  "description": "9800 PDF Report",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "standard --fix",
+    "dev": "parcel demo/index.html",
+    "build": "NODE_ENV=production parcel build demo/index.html -d dist --public-url ./",
+    "prepare": "parcel build src/index.js -d lib"
+  },
+  "keywords": ["snpr", "9800", "pdf"],
+  "author": "Linhe Huo <linhehuo@gmail.com>",
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "husky": "^0.15.0-rc.8",
+    "node-sass": "^4.7.2",
+    "parcel-bundler": "^1.6.2",
+    "standard": "^11.0.0"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
